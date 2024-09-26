@@ -1,0 +1,108 @@
+package com.example.pruebaandroid
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.draw.clip
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            BusinessCardScreen()
+        }
+    }
+}
+
+@Composable
+fun BusinessCardScreen() {
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = Color(0xFFE0E0E0)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(15.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+            Image(
+                painter = painterResource(id = R.drawable.pngwing_com__1_),
+                contentDescription = "Profile Picture",
+                modifier = Modifier
+                    .size(200.dp)
+                    .clip(CircleShape)
+                    .background(Color.Black),
+                contentScale = ContentScale.Crop
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+
+            Text(
+                text = "Camilo Soto",
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                color = Color.Black
+            )
+
+            Text(
+                text = "Ingeniero Informatico",
+                fontSize = 18.sp,
+                color = Color.Gray
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+
+            ContactInfo(icon = Icons.Filled.Phone, info = "+56 9 12345678")
+            ContactInfo(icon = Icons.Filled.Email, info = "c.soto274@alumnos.santotomas.cl")
+            ContactInfo(icon = Icons.Filled.MailOutline, info = "cami*******@gmail.com")
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+
+        }
+    }
+}
+
+@Composable
+fun ContactInfo(icon: androidx.compose.ui.graphics.vector.ImageVector, info: String) {
+    Row(
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(icon, contentDescription = null, tint = Color.Gray, modifier = Modifier.size(24.dp))
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(text = info, fontSize = 16.sp)
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun BusinessCardPreview() {
+    BusinessCardScreen()
+}
